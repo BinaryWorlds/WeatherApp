@@ -1,22 +1,22 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as S from './Hamburger.style';
 import { toggleMenu, toggleEdit } from '../../store/actions';
 
-function Hamburger() {
+function Hamburger({ isOpen, isEdit }) {
   const dispatch = useDispatch();
-  const { isMenuOpen, isEdit } = useSelector((state) => state.menu);
+
   const handleClick = () => {
-    if (!isMenuOpen) {
+    if (!isOpen) {
       dispatch(toggleMenu());
       return;
     }
-    dispatch(toggleEdit());
+    dispatch(toggleEdit(isEdit, false));
   };
 
   return (
     <S.Hamburger onClick={handleClick} aria-label="menu">
-      <S.InnerHamburger isOpen={isMenuOpen} isEdit={isEdit} />
+      <S.InnerHamburger isOpen={isOpen} isEdit={isEdit} />
     </S.Hamburger>
   );
 }

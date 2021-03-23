@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import { button } from '../../styles/basic';
 
 export const Button = styled(button)`
-  padding: 0.5rem 0;
+  padding: 0.6rem;
   display: flex;
   white-space: pre-wrap;
   align-items: center;

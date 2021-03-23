@@ -1,10 +1,10 @@
 import styled, { css } from 'styled-components';
 
 export const SiteWrapper = styled.div`
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 50%;
-  height: 100%;
+  min-height: 100%;
   width: 100%;
   max-width: 2560px;
   transform: translateX(-50%);
