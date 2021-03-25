@@ -11,7 +11,7 @@ function Hamburger({ isOpen, isEdit }) {
       dispatch(toggleMenu());
       return;
     }
-    dispatch(toggleEdit(isEdit, false));
+    dispatch(toggleEdit(false));
   };
 
   return (

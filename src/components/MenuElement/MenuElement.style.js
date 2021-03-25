@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { button, buttonStyle } from '../../styles/basic';
+import Img from '../Image/Image';
 
 export const Wrapper = styled.div`
   ${buttonStyle}
@@ -9,6 +10,7 @@ export const Wrapper = styled.div`
   & :first-child {
     width: 100%;
   }
+  cursor: pointer;
 `;
 
 export const Name = styled.p`
@@ -22,16 +24,14 @@ export const Section = styled.div`
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: 100%;
 `;
 
 export const Text = styled.p`
   font-size: ${({ theme }) => theme.fonts.size.xs};
-  display: flex;
 `;
 
-export const Image = styled.img`
-  height: 75%;
+export const Image = styled(Img)`
+  width: 12vh;
   position: absolute;
   left: 50%;
   top: 62.5%;

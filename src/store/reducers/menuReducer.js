@@ -11,7 +11,7 @@ const initialState = {
   isEdit: false,
   isCelcius: true,
   isSearch: false,
-  city: 'SARBINOWO',
+  city: '',
 };
 
 export default (state = initialState, action) => {

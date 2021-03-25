@@ -1,7 +1,14 @@
-import { UPDATE_CITIES, ADD_CITY, DELETE_CITY, COPY_LIST, SET_RESULTS } from '../actions/types';
+import {
+  UPDATE_CITIES,
+  ADD_CITY,
+  DELETE_CITY,
+  COPY_LIST,
+  SET_RESULTS,
+  RESTORE_CITY_LIST,
+} from '../actions/types';
 
 const initialState = {
-  cityList: ['Sarbinowo', 'Jaworzno', 'Katowice', 'Kraków', 'Warszawa'],
+  cityList: [],
   editList: [],
   results: [],
 };
@@ -22,6 +29,9 @@ export default (state = initialState, action) => {
 
     case SET_RESULTS:
       return { ...state, results: action.payload.slice(0) };
+
+    case RESTORE_CITY_LIST:
+      return { ...state, cityList: action.payload.slice(0) };
 
     default:
       return state;

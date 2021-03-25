@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { toggleSearch, setResults } from '../../store/actions';
+import { toggleSearch, setResults, addCity } from '../../store/actions';
 import * as S from './Searchbar.style';
 import { checkAllowed, findMatches } from '../../utils/search';
 import cityList from '../../city.list.min.json';
 
 function Searchbar() {
   const {
-    menu: { isSearch },
+    menu: { isSearch, isCelcius },
     cities: { results },
   } = useSelector((state) => state);
   const dispatch = useDispatch();
@@ -38,9 +38,14 @@ function Searchbar() {
 
   useEffect(() => () => dispatch(toggleSearch(false)), []);
 
+  const autocomplete = async (e) => {
+    await dispatch(addCity(e[0], isCelcius));
+    setTerm('');
+  };
+
   const resultsList = results.map((el) => (
-    <S.Result type="button" key={el} value={el}>
-      {el}
+    <S.Result type="button" key={el[0]} onClick={() => autocomplete(el)}>
+      {`${el[0]}, ${el[1]}`}
     </S.Result>
   ));
 

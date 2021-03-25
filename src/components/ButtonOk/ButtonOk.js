@@ -5,7 +5,7 @@ import * as S from './ButtonOk.style';
 
 function ButtonOk() {
   const dispatch = useDispatch();
-  const handleClick = () => dispatch(toggleEdit(true, true));
+  const handleClick = () => dispatch(toggleEdit(true));
 
   return <S.Button onClick={handleClick}>✔</S.Button>;
 }

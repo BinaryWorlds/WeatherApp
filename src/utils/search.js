@@ -62,7 +62,7 @@ export const findMatches = (searchedText, cityList) => {
   const { length } = cityList;
 
   for (let i = 0; i < length; i++) {
-    if (cityList[i][0].match(regEx)) result[counter++] = `${cityList[i][0]}, ${cityList[i][1]}`;
+    if (cityList[i][0].match(regEx)) result[counter++] = cityList[i].slice(0);
     if (counter > 9) break;
   }
 

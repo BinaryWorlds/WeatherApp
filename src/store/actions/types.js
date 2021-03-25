@@ -11,3 +11,5 @@ export const COPY_LIST = 'COPY_LIST';
 
 export const ADD_CITY = 'ADD_CITY';
 export const DELETE_CITY = 'DELETE_CITY';
+
+export const RESTORE_CITY_LIST = 'RESTORE_CITY_LIST';
