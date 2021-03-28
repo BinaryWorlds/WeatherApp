@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { selectCity, deleteCity } from '../../store/actions';
 import * as S from './MenuElement.style';
 import { checkWeather } from '../../api';
+import { getIcon } from '../../utils/icon';
 import { getLocalTime } from '../../utils/time';
 
 const refreshInterval = 1000;
@@ -12,11 +13,9 @@ function MenuElement({ city }) {
   const { isEdit, isCelcius } = useSelector((state) => state.menu);
 
   const [weather, setWeather] = useState({});
-  const { name, main: { temp } = {}, weather: { 0: { icon } = [] } = {} } = weather;
 
   const textRef = useRef();
   const timerId = useRef();
-  const timezone = useRef(weather.timezone || 0);
 
   const handleSelect = () => {
     if (!isEdit) dispatch(selectCity(city));
@@ -24,18 +23,18 @@ function MenuElement({ city }) {
 
   const handleDelete = () => dispatch(deleteCity(city));
 
-  const updateText = () => {
-    textRef.current.innerText = getLocalTime(timezone.current);
+  const updateText = (timezone) => {
+    textRef.current.innerText = getLocalTime(timezone);
   };
 
   useEffect(async () => {
-    const data = await checkWeather(city, isCelcius);
-    setWeather(data);
+    const { name, timezone, temp, icon } = await checkWeather(city, isCelcius);
 
-    timezone.current = data.timezone;
-    updateText();
+    setWeather({ name, timezone, temp, icon });
+
+    updateText(timezone);
     timerId.current = setInterval(() => {
-      if (textRef.current) updateText();
+      if (textRef.current) updateText(timezone);
       else clearInterval(timerId.current);
     }, refreshInterval);
 
@@ -43,21 +42,23 @@ function MenuElement({ city }) {
   }, [isCelcius]);
 
   return (
-    <S.Wrapper onClick={handleSelect}>
-      <S.Name>{name}</S.Name>
-      {icon && <S.Image src={`https://www.openweathermap.org/img/wn/${icon}@2x.png`} />}
-      <S.Section>
-        <S.Text ref={textRef} />
-        {isEdit ? (
-          <S.Delete onClick={handleDelete} />
-        ) : (
-          <S.Text>
-            {Math.floor(temp)}
-            {isCelcius ? '°C' : '°F'}
-          </S.Text>
-        )}
-      </S.Section>
-    </S.Wrapper>
+    weather && (
+      <S.Wrapper onClick={handleSelect}>
+        <S.Name>{weather.name}</S.Name>
+        <S.Image src={getIcon(weather.icon)} />
+        <S.Section>
+          <S.Text ref={textRef} />
+          {isEdit ? (
+            <S.Delete onClick={handleDelete} />
+          ) : (
+            <S.Text>
+              {weather.temp}
+              {isCelcius ? 'C' : 'F'}
+            </S.Text>
+          )}
+        </S.Section>
+      </S.Wrapper>
+    )
   );
 }
 

@@ -1,4 +1,4 @@
-export const deletePolishLetters = (string) => {
+const deletePolishLetters = (string) => {
   const diacritics = [
     'ą',
     'ć',

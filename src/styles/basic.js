@@ -1,5 +1,24 @@
 import styled, { css } from 'styled-components';
 
+export const wrapper = styled.div`
+  width: 100%;
+  padding: 0 5vw;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+export const wrapperV = styled.div`
+  width: 100%;
+  padding: 0 5vw;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+`;
+
 export const button = styled.button`
   border: none;
   background: none;
