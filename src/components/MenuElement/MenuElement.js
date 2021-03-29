@@ -28,9 +28,9 @@ function MenuElement({ city }) {
   };
 
   useEffect(async () => {
-    const { name, timezone, temp, icon } = await checkWeather(city, isCelcius);
+    const { name, timezone, temp, icon, description } = await checkWeather(city, isCelcius);
 
-    setWeather({ name, timezone, temp, icon });
+    setWeather({ name, timezone, temp, icon, description });
 
     updateText(timezone);
     timerId.current = setInterval(() => {
@@ -45,7 +45,7 @@ function MenuElement({ city }) {
     weather && (
       <S.Wrapper onClick={handleSelect}>
         <S.Name>{weather.name}</S.Name>
-        <S.Image src={getIcon(weather.icon)} />
+        <S.Image src={getIcon(weather.icon)} alt={weather.description} />
         <S.Section>
           <S.Text ref={textRef} />
           {isEdit ? (

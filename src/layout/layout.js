@@ -8,7 +8,9 @@ const GlobalStyle = createGlobalStyle`
   html {
     font-size: 62.5%;
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
+
   * {
     padding: 0;
     margin: 0;

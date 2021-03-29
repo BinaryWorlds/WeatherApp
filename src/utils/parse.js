@@ -2,14 +2,41 @@ import { getTime, dayName } from './time';
 
 const floor = (val, unit) => `${Math.floor(val)}${unit}`;
 
+const degToDirection = (deg) => {
+  if (deg < 0 || deg > 360) return 'N/A';
+  if (deg <= 11.25) return 'N';
+  const directions = [
+    'NNE',
+    'NE',
+    'ENE',
+    'E',
+    'ESE',
+    'SE',
+    'SSE',
+    'S',
+    'SSW',
+    'SW',
+    'WSW',
+    'W',
+    'WNW',
+    'NW',
+    'NNW',
+    'N',
+  ];
+  const dir = Math.floor((deg - 11.25) / 22.5);
+  return directions[dir];
+};
+
 const getData = (elList, isCelcius) => {
   const {
     dt,
     visibility,
+    pop,
     main,
     weather: { 0: { icon, description } = [] } = {},
     wind: { speed, deg } = {},
     clouds: { all: clouds },
+    sys: { pod } = {},
   } = elList || {};
 
   const { temp, temp_min: tempMin, temp_max: tempMax, feels_like: feelsLike, pressure, humidity } =
@@ -23,12 +50,14 @@ const getData = (elList, isCelcius) => {
     tempMin: floor(tempMin, '°'),
     tempMax: floor(tempMax, '°'),
     feelsLike: floor(feelsLike, '°'),
-    pressure: floor(pressure, 'hPa'),
-    humidity: floor(humidity, '%'),
-    visibility: floor(visibility, 'm'),
-    speed: floor(speed, isCelcius ? 'm/s' : 'mph'),
-    deg: floor(deg, '°'),
-    clouds: floor(clouds, '%'),
+    pressure: floor(pressure, ' hPa'),
+    humidity: floor(humidity, ' %'),
+    visibility: floor(visibility, ' m'),
+    speed: floor(speed, isCelcius ? ' m/s' : ' mph'),
+    deg: degToDirection(deg),
+    clouds: floor(clouds, ' %'),
+    pop: floor(pop, ' %'),
+    isNight: pod === 'n',
   };
 };
 

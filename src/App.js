@@ -10,12 +10,15 @@ function App() {
   useEffect(() => {
     const savedList = JSON.parse(localStorage.getItem('cityList')) || ['Sarbinowo'];
     dispatch(restoreCityList(savedList));
+    window.onbeforeunload = () => window.scrollTo(0, 0);
   }, []);
 
-  return (
+  return process.env.REACT_APP_WEATHER_API_KEY ? (
     <Layout>
       <Main />
     </Layout>
+  ) : (
+    'Set REACT_APP_WEATHER_API_KEY in .env !!! '
   );
 }
 

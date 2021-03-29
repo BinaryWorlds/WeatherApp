@@ -25,14 +25,12 @@ function Main() {
   };
 
   return (
-    <>
+    <S.SiteWrapper>
       <Header />
       <S.Background />
-      <S.SiteWrapper>
-        {isEdit && <SearchBar />}
-        {display()}
-      </S.SiteWrapper>
-    </>
+      {isEdit && <SearchBar />}
+      {display()}
+    </S.SiteWrapper>
   );
 }
 

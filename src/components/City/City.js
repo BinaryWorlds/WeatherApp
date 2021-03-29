@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { checkWeather } from '../../api';
 import { getIcon } from '../../utils/icon';
+import ButtonMore from '../ButtonMore/ButtonMore';
 
 import * as S from './City.style';
-import * as R from './rangeSlider';
 
 function City() {
   const [weather, setWeather] = useState();
@@ -17,10 +17,10 @@ function City() {
     const data = await checkWeather(cityName, isCelcius);
 
     const details = [
-      ['Description', data.description],
+      ['Precipitation', data.pop],
       ['Feels like', data.feelsLike],
       ['Wind', data.speed],
-      ['Dew Point', data.deg],
+      ['Direction', data.deg],
       ['Clouds', data.clouds],
       ['Visibility', data.visibility],
       ['Pressure', data.pressure],
@@ -33,56 +33,53 @@ function City() {
   return weather ? (
     <>
       <S.Wrapper>
-        <S.Image src={getIcon(weather.icon, true)} />
+        <S.ImageMain id="mainIcon" alt={weather.description} src={getIcon(weather.icon, true)} />
+        <S.SectionV>{weather.description}</S.SectionV>
         <S.Section id="temp">
-          <p>🠗{weather.tempMin}</p>
+          <p id="bold">&#11015;{weather.tempMin}</p>
           <p>{weather.temp}</p>
-          <p>🠕{weather.tempMax}</p>
+          <p id="bold">&#11014;{weather.tempMax}</p>
         </S.Section>
-        <S.RangeWrapper>
-          <R.Output />
-          <R.Input type="range" />
-        </S.RangeWrapper>
         <S.Section>
-          <S.Cell>
+          <S.Cell id="sun">
             <p>Sunrise</p>
-            <p>{weather.sunrise}</p>
+            <p id="bold">{weather.sunrise}</p>
           </S.Cell>
-          <S.Cell>
+          <S.Cell id="sun">
             <p> Sunset</p>
-            <p>{weather.sunset}</p>
+            <p id="bold">{weather.sunset}</p>
           </S.Cell>
         </S.Section>
-        <S.More>
-          <p>More</p>
-        </S.More>
+        <ButtonMore />
       </S.Wrapper>
       <S.Details>
         <S.Section id="nextSection">
           {weather.forecast.map((el) => (
             <S.Cell id="nextCell" key={el.dt}>
-              <p>{el.day}</p>
-              <S.Image src={getIcon(el.icon)} />
+              <p id="bold">{el.day}</p>
+              <S.Image id="iconF" src={getIcon(el.icon)} />
               <p>{el.temp}</p>
             </S.Cell>
           ))}
         </S.Section>
-        {weather.details.map((el, index, arr) => {
-          if (index % 2 !== 0) return null;
-          const next = arr[index + 1] || [];
-          return (
-            <S.Section key={el[0]}>
-              <S.Cell>
-                <p>{el[0]}</p>
-                <p>{el[1]} </p>
-              </S.Cell>
-              <S.Cell>
-                <p>{next[0]}</p>
-                <p>{next[1]}</p>
-              </S.Cell>
-            </S.Section>
-          );
-        })}
+        <S.SectionV>
+          {weather.details.map((el, index, arr) => {
+            if (index % 2 !== 0) return null;
+            const next = arr[index + 1] || [];
+            return (
+              <S.Section id="detailsSection" key={el[0]}>
+                <S.Cell id="detailsLeft">
+                  <p>{el[0]}</p>
+                  <p>{el[1]} </p>
+                </S.Cell>
+                <S.Cell id="detailsRight">
+                  <p>{next[0]}</p>
+                  <p>{next[1]}</p>
+                </S.Cell>
+              </S.Section>
+            );
+          })}
+        </S.SectionV>
       </S.Details>
     </>
   ) : null;
