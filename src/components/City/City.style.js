@@ -1,31 +1,43 @@
 import styled from 'styled-components';
 import Img from '../Image/Image';
 import { wrapper, wrapperV } from '../../styles/basic';
+import ButtonMore from '../ButtonMore/ButtonMore';
 
-export const Wrapper = styled(wrapperV)`
-  height: calc(98vh - 4rem);
-  margin-top: calc(2vh + 4rem);
+export const Wrapper = styled.div`
+  transform: translateY(${({ isOpen }) => (isOpen ? 'calc(-100vh)' : '0')});
+  transition: transform 0.5s;
+  position: relative;
+  width: 100vw;
+`;
 
-  #bold {
-    font-weight: ${({ theme }) => theme.fonts.weight.bold};
-    font-style: normal;
+export const Main = styled(wrapperV)`
+  height: calc(82vh - 4rem);
+  justify-content: space-around;
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  .description {
+    font-style: italic;
   }
 
-  #temp p,
-  #sun p {
+  .temp p,
+  .sun p {
     min-width: 6rem;
     text-align: center;
   }
 
-  #temp {
+  .temp {
     align-items: baseline;
 
     p {
       font-size: ${({ theme }) => theme.fonts.size.s};
+      font-weight: ${({ theme }) => theme.fonts.weight.bold};
     }
 
     p:nth-child(2) {
       font-size: ${({ theme }) => theme.fonts.size.xxl};
+      font-weight: ${({ theme }) => theme.fonts.weight.regular};
       position: relative;
       left: 1rem;
     }
@@ -33,55 +45,53 @@ export const Wrapper = styled(wrapperV)`
 `;
 
 export const Details = styled(wrapperV)`
-  height: calc(98vh - 8rem);
   justify-content: space-evenly;
+  position: absolute;
+  height: calc(98vh - 4rem);
+  top: 100vh;
+  left: 0;
 
-  #bold {
-    font-weight: ${({ theme }) => theme.fonts.weight.bold};
-  }
-
-  #nextSection {
+  .nextSection {
     padding: 0;
   }
 
-  #nextCell {
+  .nextCell {
     width: 20%;
 
     p {
       text-align: center;
-    }
-  }
-
-  #detailsSection {
-    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.line};
-
-    p:last-child {
       font-weight: ${({ theme }) => theme.fonts.weight.bold};
-      font-style: normal;
+    }
+    p:last-of-type {
+      font-weight: ${({ theme }) => theme.fonts.weight.regular};
     }
   }
 
-  #detailsSection:last-of-type {
+  .detailsSection {
+    border-bottom: 0.1rem solid ${({ theme }) => theme.colors.line};
+  }
+
+  .detailsSection:last-of-type {
     border: none;
   }
 
-  #detailsLeft,
-  #detailsRight {
-    padding: 1rem 0;
-    margin: 1rem 0;
+  .detailsLeft,
+  .detailsRight {
+    padding: 0.7rem 0;
+    margin: 0.7rem 0;
   }
 
-  #detailsLeft {
+  .detailsLeft {
     align-items: flex-start;
   }
 
-  #detailsRight {
+  .detailsRight {
     align-items: flex-end;
   }
 `;
 
 export const ImageMain = styled(Img)`
-  width: 70%;
+  width: 60%;
 `;
 
 export const Image = styled(Img)`
@@ -103,10 +113,13 @@ export const Cell = styled.div`
 
   p {
     font-size: ${({ theme }) => theme.fonts.size.s};
+  }
+  p:first-of-type {
     font-style: italic;
+  }
+  p:last-of-type {
+    font-weight: ${({ theme }) => theme.fonts.weight.bold};
   }
 `;
 
-export const RangeWrapper = styled(Cell)`
-  width: 100%;
-`;
+export const More = styled(ButtonMore)``;

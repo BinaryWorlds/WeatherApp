@@ -1,14 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import * as S from './ButtonMore.style';
 
-function ButtonMore() {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => {
-    const scrollTo = isOpen ? 0 : window.innerHeight;
-    window.scrollTo(0, scrollTo);
-    setIsOpen(!isOpen);
-  };
+function ButtonMore({ handleClick, isOpen }) {
   return (
     <S.Button onClick={handleClick}>
       <S.Section isOpen={isOpen} />

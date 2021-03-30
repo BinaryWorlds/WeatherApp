@@ -7,7 +7,7 @@ const colors = {
   mainB: '#2BC0E4',
   mainC: '#c9c6ec',
   searchbar: 'rgba(255,255,255,0.25)',
-  line: 'rgba(255,255,255,0.5)',
+  line: 'rgba(255,255,255,0.4)',
   red: 'rgb(210,25,25)',
   err: 'rgb(210,25,25,0.3)',
 };

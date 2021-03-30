@@ -12,7 +12,7 @@ function MenuElement({ city }) {
   const dispatch = useDispatch();
   const { isEdit, isCelcius } = useSelector((state) => state.menu);
 
-  const [weather, setWeather] = useState({});
+  const [weather, setWeather] = useState(null);
 
   const textRef = useRef();
   const timerId = useRef();
@@ -24,7 +24,7 @@ function MenuElement({ city }) {
   const handleDelete = () => dispatch(deleteCity(city));
 
   const updateText = (timezone) => {
-    textRef.current.innerText = getLocalTime(timezone);
+    if (textRef.current) textRef.current.innerText = getLocalTime(timezone);
   };
 
   useEffect(async () => {
@@ -51,10 +51,7 @@ function MenuElement({ city }) {
           {isEdit ? (
             <S.Delete onClick={handleDelete} />
           ) : (
-            <S.Text>
-              {weather.temp}
-              {isCelcius ? 'C' : 'F'}
-            </S.Text>
+            <S.Text>{`${weather.temp}${isCelcius ? 'C' : 'F'}`}</S.Text>
           )}
         </S.Section>
       </S.Wrapper>

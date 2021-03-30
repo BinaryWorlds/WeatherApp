@@ -4,6 +4,11 @@ import { button } from '../../styles/basic';
 export const Button = styled(button)`
   font-size: ${({ theme }) => theme.fonts.size.m};
   padding: 1rem;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
 `;
 
 const line = css`
