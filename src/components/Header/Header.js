@@ -11,7 +11,7 @@ function Header() {
   return (
     <S.Header isOpen={isMenuOpen}>
       <Hamburger isOpen={isMenuOpen} isEdit={isEdit} />
-      {!isMenuOpen && city.toUpperCase()}
+      {!isMenuOpen && city && city.toUpperCase()}
       {isEdit ? <ButtonOk /> : <ButtonTemp />}
     </S.Header>
   );

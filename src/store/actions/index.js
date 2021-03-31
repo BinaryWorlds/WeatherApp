@@ -1,3 +1,4 @@
+/* eslint-disable prefer-destructuring */
 import {
   TOGGLE_MENU,
   TOGGLE_EDIT,
@@ -40,10 +41,13 @@ export const selectCity = (city) => ({
   payload: city,
 });
 
-export const deleteCity = (city) => ({
-  type: DELETE_CITY,
-  payload: city,
-});
+export const deleteCity = (city) => (dispatch) => {
+  dispatch({
+    type: DELETE_CITY,
+    payload: city,
+  });
+  dispatch(selectCity(''));
+};
 
 export const toggleSearch = (isActive) => ({
   type: TOGGLE_SEARCH,
@@ -80,4 +84,37 @@ export const restoreCityList = (saved) => (dispatch) => {
     type: RESTORE_CITY_LIST,
     payload: saved,
   });
+};
+
+export const nextCity = () => (dispatch, getState) => {
+  const {
+    cities: { cityList },
+    menu: { city, isMenuOpen },
+  } = getState();
+
+  if (isMenuOpen || cityList.length < 2) return;
+
+  if (!city) {
+    dispatch(selectCity(cityList[0]));
+    return;
+  }
+
+  const index = cityList.indexOf(city);
+  if (index < 0 || index + 1 >= cityList.length) {
+    dispatch(selectCity(cityList[0]));
+    return;
+  }
+
+  dispatch(selectCity(cityList[index + 1]));
+};
+
+export const touchMenu = () => (dispatch, getState) => {
+  const {
+    menu: { isEdit, isMenuOpen, city },
+    cities: { cityList },
+  } = getState();
+
+  if (isEdit) return;
+  if (isMenuOpen && !city) dispatch(selectCity(cityList[0]));
+  dispatch(toggleMenu());
 };

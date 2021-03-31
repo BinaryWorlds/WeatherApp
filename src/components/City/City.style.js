@@ -114,9 +114,11 @@ export const Cell = styled.div`
   p {
     font-size: ${({ theme }) => theme.fonts.size.s};
   }
+
   p:first-of-type {
     font-style: italic;
   }
+
   p:last-of-type {
     font-weight: ${({ theme }) => theme.fonts.weight.bold};
   }

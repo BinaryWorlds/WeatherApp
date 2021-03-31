@@ -8,13 +8,13 @@ import * as S from './City.style';
 
 function City() {
   const [isOpen, setIsOpen] = useState(false);
-
-  const handleClick = () => setIsOpen(!isOpen);
-
   const [weather, setWeather] = useState();
+
   const {
     menu: { city: cityName, isCelcius },
   } = useSelector((state) => state);
+
+  const handleClick = () => setIsOpen(!isOpen);
 
   useEffect(async () => {
     if (!cityName) return;

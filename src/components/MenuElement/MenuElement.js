@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { selectCity, deleteCity } from '../../store/actions';
+import { selectCity, toggleMenu, deleteCity } from '../../store/actions';
 import * as S from './MenuElement.style';
 import { checkWeather } from '../../api';
 import { getIcon } from '../../utils/icon';
@@ -18,7 +18,9 @@ function MenuElement({ city }) {
   const timerId = useRef();
 
   const handleSelect = () => {
-    if (!isEdit) dispatch(selectCity(city));
+    if (isEdit) return;
+    dispatch(selectCity(city));
+    dispatch(toggleMenu());
   };
 
   const handleDelete = () => dispatch(deleteCity(city));

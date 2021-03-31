@@ -3,9 +3,12 @@ import { useDispatch } from 'react-redux';
 import Layout from './layout/layout';
 import Main from './components/Main/Main';
 import { restoreCityList } from './store/actions';
+import useTouch from './hooks/useTouch';
 
 function App() {
   const dispatch = useDispatch();
+
+  useTouch();
 
   useEffect(() => {
     const savedList = JSON.parse(localStorage.getItem('cityList')) || ['Sarbinowo'];

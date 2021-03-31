@@ -23,7 +23,7 @@ export default (state = initialState, action) => {
     case TOGGLE_UNIT:
       return { ...state, isCelcius: !state.isCelcius };
     case SELECT_CITY:
-      return { ...state, city: action.payload, isMenuOpen: false };
+      return { ...state, city: action.payload };
     case TOGGLE_SEARCH:
       return { ...state, isSearch: action.payload };
     default:
