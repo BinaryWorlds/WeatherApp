@@ -4,6 +4,8 @@ import { toggleSearch, setResults, addCity } from '../../store/actions';
 import * as S from './Searchbar.style';
 import { checkAllowed, findMatches } from '../../utils/search';
 import cityList from '../../city.list.min.json';
+import { checkWeather } from '../../api';
+import useHint from '../../hooks/useHints';
 
 function Searchbar() {
   const {
@@ -11,14 +13,26 @@ function Searchbar() {
     cities: { results },
   } = useSelector((state) => state);
   const dispatch = useDispatch();
+  const { isHintShow, handleHint } = useHint();
 
   const [term, setTerm] = useState('');
   const [err, setErr] = useState(false);
 
   const handleChange = ({ target: { value } }) => setTerm(value);
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault();
+    const city = e.target[0].defaultValue;
+    const result = await checkWeather(city, isCelcius);
+
+    if (result) {
+      dispatch(addCity(result.name, isCelcius));
+      setTerm('');
+      return;
+    }
+
+    handleHint();
+    setErr(true);
   };
 
   useEffect(() => {
@@ -39,7 +53,7 @@ function Searchbar() {
   useEffect(() => () => dispatch(toggleSearch(false)), []);
 
   const autocomplete = async (e) => {
-    await dispatch(addCity(e[0], isCelcius));
+    dispatch(addCity(e[0], isCelcius));
     setTerm('');
   };
 
@@ -60,9 +74,14 @@ function Searchbar() {
           err={err}
           placeholder="Search city"
         />
+        <S.Hint isHintShow={isHintShow}>No results</S.Hint>
       </S.Label>
-      <S.Button />
-      {isSearch && resultsList}
+      {isSearch && !err && (
+        <S.Result className="searchBtn" type="submit">
+          Search
+        </S.Result>
+      )}
+      {isSearch && !err && resultsList}
     </S.Form>
   );
 }

@@ -1,11 +1,21 @@
 import styled from 'styled-components';
 import { button, buttonStyle } from '../../styles/basic';
+import { BasicHint } from '../../hooks/useHints';
 
 export const Form = styled.form`
   margin: 10vh 4vw;
   margin-bottom: 2vh;
   display: flex;
   flex-direction: column;
+
+  .searchBtn {
+    font-weight: ${({ theme }) => theme.fonts.weight.bold};
+    align-self: center;
+    width: 50vw;
+    :before {
+      width: 50vw;
+    }
+  }
 `;
 
 export const Label = styled.label`
@@ -35,11 +45,14 @@ export const Input = styled.input`
   font-size: ${({ theme }) => theme.fonts.size.s};
 `;
 
-export const Button = styled(button)``;
-
 export const Result = styled(button)`
   ${buttonStyle}
   align-items: center;
   justify-content: center;
-  margin: 1vh 4vw;
+`;
+
+export const Hint = styled(BasicHint)`
+  bottom: -50%;
+  left: 50%;
+  transform: translate(-50%, 50%);
 `;
