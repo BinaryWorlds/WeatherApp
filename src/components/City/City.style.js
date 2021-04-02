@@ -7,7 +7,6 @@ export const Wrapper = styled.div`
   transform: translateY(${({ isOpen }) => (isOpen ? 'calc(-100vh)' : '0')});
   transition: transform 0.5s;
   position: relative;
-  width: 100vw;
 `;
 
 export const Main = styled(wrapperV)`
@@ -42,6 +41,26 @@ export const Main = styled(wrapperV)`
       left: 1rem;
     }
   }
+
+  ${({ theme }) => theme.mq.landscape} {
+    flex-flow: column wrap;
+    justify-content: space-around;
+    align-content: space-around;
+
+    & > * {
+      width: 50%;
+    }
+
+    .mainIcon {
+      order: -1;
+    }
+  }
+
+  ${({ theme }) => theme.mq.phoneL} {
+    .temp {
+      padding: 0 1vw;
+    }
+  }
 `;
 
 export const Details = styled(wrapperV)`
@@ -62,6 +81,7 @@ export const Details = styled(wrapperV)`
       text-align: center;
       font-weight: ${({ theme }) => theme.fonts.weight.bold};
     }
+
     p:last-of-type {
       font-weight: ${({ theme }) => theme.fonts.weight.regular};
     }
@@ -69,10 +89,9 @@ export const Details = styled(wrapperV)`
 
   .detailsSection {
     border-bottom: 0.1rem solid ${({ theme }) => theme.colors.line};
-  }
-
-  .detailsSection:last-of-type {
-    border: none;
+    width: calc(100% - 5vw);
+    padding: 0 2.5vw;
+    margin: 0 2.5vw;
   }
 
   .detailsLeft,
@@ -88,10 +107,36 @@ export const Details = styled(wrapperV)`
   .detailsRight {
     align-items: flex-end;
   }
+
+  ${({ theme }) => theme.mq.landscape} {
+    .nextSection {
+      width: 50%;
+    }
+
+    .details {
+      flex-flow: row wrap;
+      justify-content: space-around;
+      align-content: space-around;
+    }
+
+    .detailsSection {
+      width: calc(50% - 5vw);
+    }
+  }
+
+  ${({ theme }) => theme.mq.portrait} {
+    .detailsSection:last-of-type {
+      border: none;
+    }
+  }
 `;
 
 export const ImageMain = styled(Img)`
   width: 60%;
+  ${({ theme }) => theme.mq.landscape} {
+    width: 40%;
+    max-width: 50vh;
+  }
 `;
 
 export const Image = styled(Img)`

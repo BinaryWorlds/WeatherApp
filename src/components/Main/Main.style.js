@@ -3,7 +3,7 @@ import styled, { css } from 'styled-components';
 export const SiteWrapper = styled.div`
   height: 100%;
   width: 100vw;
-  margin-top: calc(2vh + 4rem);
+  padding-top: calc(2vh + 4rem);
 `;
 
 export const Background = styled.div`

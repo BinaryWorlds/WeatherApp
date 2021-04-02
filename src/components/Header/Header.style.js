@@ -11,7 +11,6 @@ export const Header = styled.header`
   width: 100vw;
   padding: 2vh 5vw;
   padding-bottom: 1vh;
-  margin-bottom: 1vh;
 
   ${({ theme: { colors }, isOpen }) =>
     !isOpen &&

@@ -29,7 +29,7 @@ export const button = styled.button`
 export const buttonStyle = css`
   position: relative;
   padding: 2vh;
-  margin: 2vh 4vw;
+  margin: max(2vh, 1rem) max(4vw, 1rem);
 
   display: flex;
 

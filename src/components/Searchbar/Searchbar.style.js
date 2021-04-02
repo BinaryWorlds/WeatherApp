@@ -3,7 +3,7 @@ import { button, buttonStyle } from '../../styles/basic';
 import { BasicHint } from '../../hooks/useHints';
 
 export const Form = styled.form`
-  margin: 10vh 4vw;
+  margin: max(2vh, 1rem) 4vw;
   margin-bottom: 2vh;
   display: flex;
   flex-direction: column;

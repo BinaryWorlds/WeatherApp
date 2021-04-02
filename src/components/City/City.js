@@ -46,7 +46,11 @@ function City() {
       <S.Wrapper isOpen={isOpen}>
         <S.Main>
           <S.SectionV className="description">{weather.description}</S.SectionV>
-          <S.ImageMain alt={weather.description} src={getIcon(weather.icon, true)} />
+          <S.ImageMain
+            className="mainIcon"
+            alt={weather.description}
+            src={getIcon(weather.icon, true)}
+          />
           <S.Section className="temp">
             <p>&#11015;{weather.tempMin}</p>
             <p>{weather.temp}</p>
@@ -73,7 +77,7 @@ function City() {
               </S.Cell>
             ))}
           </S.Section>
-          <S.SectionV>
+          <S.SectionV className="details">
             {weather.details.map((el, index, arr) => {
               if (index % 2 !== 0) return null;
               const next = arr[index + 1] || [];

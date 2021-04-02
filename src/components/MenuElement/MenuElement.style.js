@@ -5,6 +5,7 @@ import Img from '../Image/Image';
 export const Wrapper = styled.div`
   ${buttonStyle}
   height: 16vh;
+  min-height: 7rem;
   flex-wrap: wrap;
 
   & :first-child {
@@ -32,6 +33,7 @@ export const Text = styled.p`
 
 export const Image = styled(Img)`
   width: 12vh;
+  min-width: 5.25rem;
   position: absolute;
   left: 50%;
   top: 62.5%;
