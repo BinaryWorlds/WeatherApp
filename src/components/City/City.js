@@ -42,7 +42,7 @@ function City() {
 
   return weather ? (
     <>
-      <S.More handleClick={handleClick} isOpen={isOpen} />
+      <S.More alt="details" handleClick={handleClick} isOpen={isOpen} />
       <S.Wrapper isOpen={isOpen}>
         <S.Main>
           <S.SectionV className="description">{weather.description}</S.SectionV>
@@ -72,7 +72,7 @@ function City() {
             {weather.forecast.map((el) => (
               <S.Cell className="nextCell" key={el.dt}>
                 <p>{el.day}</p>
-                <S.Image src={getIcon(el.icon)} />
+                <S.Image alt={el.day} src={getIcon(el.icon)} />
                 <p>{el.temp}</p>
               </S.Cell>
             ))}
