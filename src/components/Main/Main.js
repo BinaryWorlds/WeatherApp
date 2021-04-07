@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import * as S from './Main.style';
@@ -6,6 +6,7 @@ import Header from '../Header/Header';
 import MenuElement from '../MenuElement/MenuElement';
 import City from '../City/City';
 import SearchBar from '../Searchbar/Searchbar';
+import useHint from '../../hooks/useHints';
 
 function Main() {
   const {
@@ -13,6 +14,9 @@ function Main() {
     menu: { isMenuOpen, isEdit, isSearch },
   } = useSelector((state) => state);
 
+  const { isHintShow, handleHint } = useHint();
+
+  useEffect(handleHint, []);
   const display = () => {
     if (isSearch) return null;
 
@@ -30,6 +34,12 @@ function Main() {
       <S.Background />
       {isEdit && <SearchBar />}
       {display()}
+      <S.Hint className="hintOne" isHintShow={isHintShow}>
+        &#11106; Swipe from left to open menu
+      </S.Hint>
+      <S.Hint className="hintTwo" isHintShow={isHintShow}>
+        Swipe from right to change city &#11013;
+      </S.Hint>
     </S.SiteWrapper>
   );
 }

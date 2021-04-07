@@ -39,7 +39,6 @@ export const BasicHint = styled.div`
   width: 90vh;
   max-width: 90vw;
   border-radius: 1.5rem;
-
   z-index: 200;
   position: absolute;
   background-color: rgba(0, 0, 0, 0.8);

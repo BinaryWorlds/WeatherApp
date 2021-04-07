@@ -27,6 +27,7 @@ export const Main = styled(wrapperV)`
   }
 
   .temp {
+    display: flex;
     align-items: baseline;
 
     p {
@@ -76,9 +77,7 @@ export const Details = styled(wrapperV)`
 
   .nextCell {
     width: 20%;
-
-    p {
-      text-align: center;
+    p:first-of-type {
       font-weight: ${({ theme }) => theme.fonts.weight.bold};
     }
 

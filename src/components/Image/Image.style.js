@@ -1,4 +1,6 @@
 import styled from 'styled-components';
+import { fadeInEffect } from '../../animations/fadeIn';
+import { fadeOutEffect } from '../../animations/fadeOut';
 
 export const Wrapper = styled.div`
   position: relative;
@@ -13,4 +15,5 @@ export const Container = styled.div`
 export const Image = styled.img`
   width: 100%;
   position: absolute;
+  ${({ isVisible }) => (isVisible ? fadeInEffect : fadeOutEffect)};
 `;

@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { checkWeather } from '../../api';
 import { getIcon } from '../../utils/icon';
 import { lockScroll, unlockScroll } from '../../utils/scroll';
-
+import Memo from '../Memo/Memo';
 import * as S from './City.style';
 
 function City() {
@@ -45,25 +45,27 @@ function City() {
       <S.More alt="details" handleClick={handleClick} isOpen={isOpen} />
       <S.Wrapper isOpen={isOpen}>
         <S.Main>
-          <S.SectionV className="description">{weather.description}</S.SectionV>
+          <S.SectionV className="description">
+            <Memo text={weather.description} />
+          </S.SectionV>
           <S.ImageMain
             className="mainIcon"
             alt={weather.description}
             src={getIcon(weather.icon, true)}
           />
           <S.Section className="temp">
-            <p>&#11015;{weather.tempMin}</p>
-            <p>{weather.temp}</p>
-            <p>&#11014;{weather.tempMax}</p>
+            <Memo text={`⬇${weather.tempMin}`} />
+            <Memo text={weather.temp} />
+            <Memo text={`⬆${weather.tempMax}`} />
           </S.Section>
           <S.Section>
             <S.Cell className="sun">
-              <p>Sunrise</p>
-              <p>{weather.sunrise}</p>
+              <Memo text="Sunrise" />
+              <Memo text={weather.sunrise} />
             </S.Cell>
             <S.Cell className="sun">
-              <p> Sunset</p>
-              <p>{weather.sunset}</p>
+              <Memo text="Sunset" />
+              <Memo text={weather.sunset} />
             </S.Cell>
           </S.Section>
         </S.Main>
@@ -71,9 +73,9 @@ function City() {
           <S.Section className="nextSection">
             {weather.forecast.map((el) => (
               <S.Cell className="nextCell" key={el.dt}>
-                <p>{el.day}</p>
+                <Memo text={el.day} />
                 <S.Image alt={el.day} src={getIcon(el.icon)} />
-                <p>{el.temp}</p>
+                <Memo text={el.temp} />
               </S.Cell>
             ))}
           </S.Section>
@@ -85,11 +87,11 @@ function City() {
                 <S.Section className="detailsSection" key={el[0]}>
                   <S.Cell className="detailsLeft">
                     <p>{el[0]}</p>
-                    <p>{el[1]} </p>
+                    <Memo text={el[1]} />
                   </S.Cell>
                   <S.Cell className="detailsRight">
                     <p>{next[0]}</p>
-                    <p>{next[1]}</p>
+                    <Memo text={next[1]} />
                   </S.Cell>
                 </S.Section>
               );
