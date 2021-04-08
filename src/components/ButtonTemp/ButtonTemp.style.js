@@ -10,6 +10,7 @@ export const Button = styled(button)`
 
   p {
     font-size: ${({ theme }) => theme.fonts.size.s};
+    transition: color 1s;
   }
 
   ${({ isCelcius, theme }) => css`

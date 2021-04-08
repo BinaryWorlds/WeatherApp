@@ -11,9 +11,19 @@ export const Header = styled.header`
   width: 100vw;
   padding: 2vh 5vw;
 
-  ${({ theme: { colors }, isOpen }) =>
-    !isOpen &&
-    css`
+  :before {
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    content: '';
+    transition: opacity 1s linear;
+    opacity: ${({ isOpen }) => (isOpen ? 0 : 1)};
+
+    ${({ theme: { colors } }) => css`
       background: linear-gradient(45deg, ${colors.mainB} 10%, ${colors.mainC});
-    `}
+    `};
+  }
 `;

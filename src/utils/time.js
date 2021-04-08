@@ -8,8 +8,10 @@ export const dayName = (nr) => {
   return days[day];
 };
 
-export const getTime = (s) => {
-  const d = new Date(s * 1000);
+export const getTime = (ms, timezone = 0) => {
+  const offset = new Date().getTimezoneOffset();
+
+  const d = new Date((ms + offset * 60 + timezone) * 1000);
 
   let minutes = d.getMinutes();
   minutes = numberAsTeen(minutes);

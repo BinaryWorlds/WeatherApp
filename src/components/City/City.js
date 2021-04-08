@@ -72,7 +72,7 @@ function City() {
         <S.Details>
           <S.Section className="nextSection">
             {weather.forecast.map((el) => (
-              <S.Cell className="nextCell" key={el.dt}>
+              <S.Cell className="nextCell" key={el.day}>
                 <Memo text={el.day} />
                 <S.Image alt={el.day} src={getIcon(el.icon)} />
                 <Memo text={el.temp} />

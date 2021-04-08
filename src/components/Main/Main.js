@@ -17,6 +17,7 @@ function Main() {
   const { isHintShow, handleHint } = useHint();
 
   useEffect(handleHint, []);
+
   const display = () => {
     if (isSearch) return null;
 
@@ -35,10 +36,10 @@ function Main() {
       {isEdit && <SearchBar />}
       {display()}
       <S.Hint className="hintOne" isHintShow={isHintShow}>
-        &#11106; Swipe from left to open menu
+        &#8674; Swipe from left to open menu
       </S.Hint>
       <S.Hint className="hintTwo" isHintShow={isHintShow}>
-        Swipe from right to change city &#11013;
+        Swipe from right to change city &#8672;
       </S.Hint>
     </S.SiteWrapper>
   );

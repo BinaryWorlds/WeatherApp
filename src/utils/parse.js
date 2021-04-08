@@ -39,16 +39,13 @@ const getData = (elList, isCelcius) => {
     sys: { pod } = {},
   } = elList || {};
 
-  const { temp, temp_min: tempMin, temp_max: tempMax, feels_like: feelsLike, pressure, humidity } =
-    main || {};
+  const { temp, feels_like: feelsLike, pressure, humidity } = main || {};
 
   return {
     dt,
     icon,
     description,
     temp: floor(temp, '°'),
-    tempMin: floor(tempMin, '°'),
-    tempMax: floor(tempMax, '°'),
     feelsLike: floor(feelsLike, '°'),
     pressure: floor(pressure, ' hPa'),
     humidity: floor(humidity, ' %'),
@@ -63,14 +60,40 @@ const getData = (elList, isCelcius) => {
 
 const filterData = (list) => {
   let arr = list.filter((el) => el.dt_txt.slice(11, 13) === '12');
-  if (arr.length > 5) arr = arr.slice(1, 6);
+  if (arr.length > 4) arr = arr.slice(1, 5);
   arr = arr.map((el, index) => ({ ...getData(el), day: dayName(index) }));
   return arr;
 };
 
-const getSunText = (ms) => {
-  const { hours, minutes } = getTime(ms);
+const getSunText = (ms, timezone) => {
+  const { hours, minutes } = getTime(ms, timezone);
   return `${hours}:${minutes}`;
+};
+
+export const getTemp = (elList) => {
+  const { dt, main: { temp } = {} } = elList || {};
+  return { dt, temp };
+};
+
+export const getMinMax = (list) => {
+  const { dt } = getTemp(list[0]);
+  const { day: startDay } = getTime(dt);
+  const { length } = list;
+  let temporaryTemp;
+  let temporaryDay;
+  const tempList = [];
+
+  for (let i = 0; i < length; i++) {
+    temporaryTemp = getTemp(list[i]);
+    temporaryDay = getTime(temporaryTemp.dt);
+    if (temporaryDay.day !== startDay) break;
+    tempList[i] = temporaryTemp.temp;
+  }
+
+  const tempMin = Math.min(...tempList);
+  const tempMax = Math.max(...tempList);
+
+  return { tempMin: floor(tempMin, '°'), tempMax: floor(tempMax, '°') };
 };
 
 export const parseForecast = (data, isCelcius) => {
@@ -80,9 +103,10 @@ export const parseForecast = (data, isCelcius) => {
   return {
     name,
     timezone,
-    sunrise: getSunText(sunrise),
-    sunset: getSunText(sunset),
+    sunrise: getSunText(sunrise, timezone),
+    sunset: getSunText(sunset, timezone),
     forecast: filterData(list),
+    ...getMinMax(list),
     ...getData(list[0], isCelcius),
   };
 };
