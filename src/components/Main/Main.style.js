@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { BasicHint } from '../../hooks/useHints';
+import { buttonStyle } from '../../styles/basic';
 
 export const SiteWrapper = styled.div`
   height: 100%;
@@ -31,4 +32,13 @@ export const Background = styled.div`
 
 export const Hint = styled(BasicHint)`
   transform: translateX(-50%);
+`;
+
+export const Nothing = styled.div`
+  ${buttonStyle}
+  height: 8vh;
+  min-height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  font-weight: ${({ theme }) => theme.fonts.weight.bold};
 `;
