@@ -11,7 +11,7 @@ function App() {
   useTouch();
 
   useEffect(() => {
-    const savedList = JSON.parse(localStorage.getItem('cityList')) || ['Sarbinowo'];
+    const savedList = JSON.parse(localStorage.getItem('cityList')) || ['Sarbinowo', 'Miami'];
     dispatch(restoreCityList(savedList));
     window.onbeforeunload = () => window.scrollTo(0, 0);
   }, []);
